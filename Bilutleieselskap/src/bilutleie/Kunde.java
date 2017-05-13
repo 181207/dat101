@@ -8,27 +8,39 @@ import javax.persistence.*;
 public class Kunde {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer kunde_id;
+	private Integer kundeNr;
+	@Column(name = "fornavn")
 	private String fornavn;
+	@Column(name = "etternavn")
 	private String etternavn;
-	private Integer telefon;
+	@Column(name = "tlf")
+	private Integer tlf;
+	@Column(name = "kort")
+	private Integer kort;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "adresse", referencedColumnName = "id")
     private Adresse adresse;
 	
-	public Kunde() {
-		fornavn = "";
-		etternavn = "";
-		telefon = 0;
-	}
-	
-	public Integer getKunde_id() {
-		return kunde_id;
+	public Kunde(){
+		this(0,"","",0,0,null);
 	}
 
-	public void setKunde_id(Integer kunde_id) {
-		this.kunde_id = kunde_id;
+	public Kunde(Integer kundeNr, String fornavn, String etternavn, Integer tlf, Integer kort, Adresse adresse) {
+		this.kundeNr = kundeNr;
+		this.fornavn = fornavn;
+		this.etternavn = etternavn;
+		this.tlf = tlf;
+		this.kort = kort;
+		this.adresse = adresse;
+	}
+
+	public Integer getKundeNr() {
+		return kundeNr;
+	}
+
+	public void setKundeNr(Integer kundeNr) {
+		this.kundeNr = kundeNr;
 	}
 
 	public String getFornavn() {
@@ -47,12 +59,20 @@ public class Kunde {
 		this.etternavn = etternavn;
 	}
 
-	public Integer getTelefon() {
-		return telefon;
+	public Integer getTlf() {
+		return tlf;
 	}
 
-	public void setTelefon(Integer telefon) {
-		this.telefon = telefon;
+	public void setTlf(Integer tlf) {
+		this.tlf = tlf;
+	}
+
+	public Integer getKort() {
+		return kort;
+	}
+
+	public void setKort(Integer kort) {
+		this.kort = kort;
 	}
 
 	public Adresse getAdresse() {
@@ -62,5 +82,9 @@ public class Kunde {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
+	
+	
+	
+	
 
 }
